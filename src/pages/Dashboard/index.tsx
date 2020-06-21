@@ -27,7 +27,10 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
-      // TODO LOAD FOODS
+      api.get('/foods').then((response: any) => {
+        console.log(response.data);
+        setFoods(response.data);
+      });
     }
 
     loadFoods();
@@ -50,7 +53,8 @@ const Dashboard: React.FC = () => {
   }
 
   async function handleDeleteFood(id: number): Promise<void> {
-    // TODO DELETE A FOOD PLATE FROM THE API
+    const food = foods.filter(item => item.id !== id);
+    setFoods(food);
   }
 
   function toggleModal(): void {
@@ -82,7 +86,7 @@ const Dashboard: React.FC = () => {
 
       <FoodsContainer data-testid="foods-list">
         {foods &&
-          foods.map(food => (
+          foods.map((food: IFoodPlate) => (
             <Food
               key={food.id}
               food={food}
