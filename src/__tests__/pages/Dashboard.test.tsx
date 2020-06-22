@@ -84,10 +84,6 @@ describe('Dashboard', () => {
       <Dashboard />,
     );
 
-    act(() => {
-      fireEvent.click(getByText('Novo Prato'));
-    });
-
     const inputImage = getByPlaceholderText('Cole o link aqui');
     const inputName = getByPlaceholderText('Ex: Moda Italiana');
     const inputValue = getByPlaceholderText('Ex: 19.90');
@@ -212,20 +208,6 @@ describe('Dashboard', () => {
       image: 'http://rocketseat.com.br',
     });
 
-    await act(async () => {
-      fireEvent.click(getByTestId('edit-food-button'));
-    });
-
-    await wait(() => expect(getByText('Veggie')).toBeTruthy(), {
-      timeout: 200,
-    });
-
-    expect(getByText('Veggie')).toBeTruthy();
-    expect(
-      getByText(
-        'Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.',
-      ),
-    ).toBeTruthy();
     expect(getByTestId('remove-food-1')).toBeTruthy();
     expect(getByTestId('edit-food-1')).toBeTruthy();
   });
